@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const workoutSchema = new Schema({
-    date: {
+    day: {
         type: Date,
         default: Date.now
     },
@@ -12,14 +12,13 @@ const workoutSchema = new Schema({
             type: {
                 type: String,
                 required: true,
-                enum: ["resistance", "cardio"]
             },
             name: {
                 type: String,
                 required: true,
                 trim: true
             },
-            time: {
+            duration: {
                 type: Number,
             },
             weight: {
