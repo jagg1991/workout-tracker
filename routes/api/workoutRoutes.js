@@ -2,15 +2,6 @@ const router = require("express").Router();
 const { db } = require("../../models/Workout");
 const Workout = require("../../models/Workout");
 
-router.get('/', (req, res) => {
-    Workout.find({})
-        .then(dbWorkout => {
-            res.json(dbWorkout)
-        })
-        .catch(err => {
-            res.status(400).json(err);
-        });
-});
 
 router.post('/', ({ body }, res) => {
     Workout.create(body)
