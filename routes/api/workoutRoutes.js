@@ -2,15 +2,15 @@ const router = require("express").Router();
 const { db } = require("../../models/Workout");
 const Workout = require("../../models/Workout");
 
-// router.get('/', (req, res) => {
-//     Workout.find({})
-//         .then(dbWorkout => {
-//             res.json(dbWorkout)
-//         })
-//         .catch(err => {
-//             res.status(400).json(err);
-//         });
-// });
+router.get('/', (req, res) => {
+    Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout)
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
 
 router.post('/', ({ body }, res) => {
     Workout.create(body)
@@ -42,7 +42,7 @@ router.post('/', ({ body }, res) => {
 router.put('/:id', (req, res) => {
     Workout.updateOne({ _id: req.params.id },
         {
-            $set: {
+            $push: {
                 exercises: req.body
             }
         })
@@ -73,3 +73,22 @@ router.get('/', (req, res) => {
         })
 })
 module.exports = router;
+
+router.get('/range', (req, res) => {
+    Workout.aggregate([{
+        $addFields: { totalDuration: { $sum: "$exercises.duration" } }
+    }
+    ])
+        .limit(7)
+        .sort({ date: -1 })
+
+        .then(dbWorkout => {
+            console.log(dbWorkout)
+
+            res.json(dbWorkout)
+
+        })
+        .catch(err => {
+            res.status(400).json(err)
+        })
+})
