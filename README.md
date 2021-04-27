@@ -14,6 +14,8 @@ Follow the link below to try out the application for yourself! Let the gains beg
 
 [Link](https://desolate-hamlet-96794.herokuapp.com/?id=60833f61b3de2100159795ab)
 
+![](public/img/screenshot.png)
+
 ## Description of Work-out Tracker
 
 
